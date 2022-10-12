@@ -1,0 +1,44 @@
+vue3.0笔记
+vue3.0比vue2.0优势在哪里？
+1.重写了虚拟Dom的实现（跳过静态节点，只处理动态节点），update性能提高1.3~2倍，SSR速度提高了2~3倍
+2.Tree shaking 可以将无用模块“剪辑”，仅打包需要的
+3.TypeScript 更高的支持TypeSript
+4.Composition API : 组合式API，替换原有的Options,根据逻辑相关性组织代码，提高可读性和可维护性，
+但是依然可以沿用Options API
+5.Proxy: 响应式原理不再基于Object.defineProperty
+
+vue3脚手架搭建
+npm install -g @vue/cli
+vue --version //需4.3.1版本以上
+vue create xxx
+vue add vue-next
+或者
+npm init vite-app xxx
+cd xxx
+npm install
+npm run dev
+npm run build
+
+setup和响应式系统API
+setup 函数是一个新的组件选项，作为在组件内使用Composition API
+   初始化props和beforeCreate之间调用
+   可以接收props和context
+   this在setup（）中不可用  --原因：发生在beforeCreate之间调用
+响应式：1.构建响应式数据ref（一般处理简单值的响应式）defineProperty监听value值
+             2.响应式数据构建方案 reactive 基于Proxy对数据进行深度的监听，以此构建响应式
+
+watchEffect: 第一次就执行，如果里面所依赖的项发生改变，它会再执行
+watch：1.第一次不执行，需要侦听特定的数据源，并在回调函数中执行副作用
+             2.默认情况是懒执行的，也就是说仅在侦听的源变更时才执行回调
+
+vue2与vue3生命周期函数对比
+beforeCreate --> setup();
+created --> setup();
+beforeMount --> onBeforeMount
+mounted --> onMounted
+beforeUpdate --> onBeforeUpdate
+updated --> onUpdated
+beforeDestroy --> onBeforeUnmount
+destroyed --> onUnmounted
+
+
