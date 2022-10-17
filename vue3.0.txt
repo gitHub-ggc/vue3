@@ -41,4 +41,6 @@ updated --> onUpdated
 beforeDestroy --> onBeforeUnmount
 destroyed --> onUnmounted
 
-
+注意：
+1.vant 和 element 都用不了
+2..vue文件允许多个根节点
